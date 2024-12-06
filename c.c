@@ -21,7 +21,7 @@ int itemCount = 0;
 // Product or DateItem  and keep Price KIp
 
 struct Product{
-    char name[20];
+    char name[50];
     int price; // Kip
 }   
     Pepsi = {"Pepsi", 5000},
@@ -108,22 +108,23 @@ void OrderItem(char Country[30], char NameCurrency[5], int CurrencyExchangeRate,
 
     do {
         printf("\n--- Summary of Your Purchases ---\n");
-        printf("Total in %s: %.2f %s\n", Country, totalS, NameCurrency);
-        printf("Please enter money: ");
+        printf("\nTotal in %s: %.2f %s \n", Country, totalS, NameCurrency);
+        printf("\nPlease enter money: ");
 
-        while (scanf("%f", &money) != 1  || money > MoneyLimit) {
-            printf("Invalid input. Please enter a valid amount. (Limit: %.2f %s)\n", MoneyLimit, NameCurrency);
+        while (scanf("%f", &money) != 1  || money < MoneyLimit) {
+            printf("Invalid input. Please enter a valid amount. (Limit: %.2f %s)", MoneyLimit, NameCurrency);
+            printf("\nPlease enter money again: ");
             while (getchar() != '\n'); // Clear buffer
         }
 
         change = money - totalS;
 
         if (change < 0) {
-            printf("Insufficient money. Please add more.\n");
+            printf("\nInsufficient money. Please add more.\n");
             totalS -= money; // Deduct the money paid so far from the total
         } else {
-            printf("Thank you for shopping!\n");
-            printf("Change: %.2f %s\n", change, NameCurrency);
+            printf("\n---- Thank you for shopping! ----\n");
+            printf("\n Change: %.2f %s \n", change, NameCurrency);
         }
     } while (change < 0);
 
@@ -166,7 +167,5 @@ int main(){
         break;
         default: printf("Invalid selection.\n"); break;
     }
-    
-
     return 0;
 }
